@@ -1,0 +1,5 @@
+# One phrase per line, matched case-insensitively. Lines starting with # are comments.
+# The generic phrases of the anti-machine lint.
+Важно отметить
+Стоит отметить
+В современном мире

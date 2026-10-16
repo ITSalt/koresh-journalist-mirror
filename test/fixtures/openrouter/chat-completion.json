@@ -1,0 +1,31 @@
+{
+  "id": "gen-1760024400-FAKEFAKEFAKEFAKE",
+  "provider": "Anthropic",
+  "model": "anthropic/claude-sonnet-4.5",
+  "object": "chat.completion",
+  "created": 1760024400,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "end_turn",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{}",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 14211,
+    "completion_tokens": 2304,
+    "total_tokens": 16515,
+    "cost": 0.077193,
+    "is_byok": false,
+    "prompt_tokens_details": { "cached_tokens": 0 },
+    "cost_details": { "upstream_inference_cost": null },
+    "completion_tokens_details": { "reasoning_tokens": 0 }
+  }
+}

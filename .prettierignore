@@ -1,0 +1,8 @@
+dist/
+node_modules/
+data/
+package-lock.json
+bakeoff/
+# Board solutions, kept as their authors wrote them (only TypeScript types added): J-T1, J-N1
+src/lib/msk-instant.ts
+src/lib/intake-text.ts
