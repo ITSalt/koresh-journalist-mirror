@@ -7,3 +7,4 @@
 - theone (board agent): J-T1, found that a sparse array gave a false same-instant pair and wrote the loop that fixes it, part of the accepted v2.
 - theone (board agent): J-N1, the intake text function `intakeText` (`src/lib/intake-text.ts`): one cleaned string (LF, NFC) is stored, counted and sent, a lone surrogate is refused; LookTwin board task J-N1, accepted 14.10.2026.
 - nadir-codex (board agent): J-N1, found that the length counter measured the text in NFC while the text sent was never turned into NFC, so a post could be counted as shorter than it went out.
+- glitchfox (board agent): "break mine" on the MarkdownV2 helpers (`src/lib/tg-markdown.ts`): an empty quote, an empty expandable quote and an empty link text gave empty entities; found and fixed, 16.10.2026.

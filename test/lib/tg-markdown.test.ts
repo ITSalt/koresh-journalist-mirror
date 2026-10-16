@@ -165,6 +165,19 @@ describe('md helpers', () => {
     expect(md.expandableQuote([])).toBe('');
   });
 
+  test('empty escaped content gives empty string (no empty entity)', () => {
+    // Finding: blank-line expandableQuote / empty link text / blank-line quote
+    // reached live via renderPlanText md.quote on "> " lines.
+    expect(md.expandableQuote([''])).toBe('');
+    expect(md.expandableQuote(['', ''])).toBe('');
+    expect(md.link('', 'https://example.com')).toBe('');
+    expect(md.quote([''])).toBe('');
+    expect(md.quote(['', ''])).toBe('');
+    // Non-empty content with a trailing blank line still emits the blank quote line.
+    expect(md.quote(['раз', ''])).toBe('>раз\n>');
+    expect(md.expandableQuote(['раз', ''])).toBe('**>раз\n>||');
+  });
+
   test('property: helper output minus its markers is a valid escaped run of the input', () => {
     fc.assert(
       fc.property(fc.string({ unit: 'binary', minLength: 1 }), (s) => {

@@ -1,6 +1,6 @@
 # koresh-journalist: public mirror
 
-Read-only snapshot of `main` at `acd4313`, without history, for board agents (the owner's order of
+Read-only snapshot of `main` at `49bbb59`, without history, for board agents (the owner's order of
 13.10.2026). The real repository is private; this one is refreshed by the studio after merges.
 
 ## What is not here, and why
@@ -23,7 +23,7 @@ Read-only snapshot of `main` at `acd4313`, without history, for board agents (th
 ## Tests that fail here
 
 The tests that need a removed file fail in this mirror; everything else runs as in the private
-repository (`npm ci && npm test`). Known at `acd4313`:
+repository (`npm ci && npm test`). Known at `49bbb59`:
 
 - `test/plan/prompt.test.ts`, one test ("loads the committed style bible and rules"): it checks
   the real texts of `prompts/`, which are placeholders here.

@@ -16,8 +16,12 @@ export function escapeMdV2(text: string): string {
 /** Wraps escaped `s` in `marker`; an empty `s` gives '' (no empty entity, no stray markers). */
 const wrap = (marker: string, s: string) => (s ? `${marker}${escapeMdV2(s)}${marker}` : '');
 
-/** Quote lines: each raw line escaped and prefixed with `>`, joined by newlines. */
-const quoteLines = (lines: string[]) => lines.map((l) => `>${escapeMdV2(l)}`).join('\n');
+/** Quote lines: each raw line escaped and prefixed with `>`, joined by newlines.
+ *  Every-line-empty (or no lines) gives '' — no empty quote entity / stray `>`. */
+const quoteLines = (lines: string[]) => {
+  if (lines.length === 0 || lines.every((l) => l === '')) return '';
+  return lines.map((l) => `>${escapeMdV2(l)}`).join('\n');
+};
 
 /**
  * Entity helpers: raw text in, MarkdownV2 out. A caller that puts an italic right before or after
@@ -28,11 +32,14 @@ export const md = {
   italic: (s: string): string => wrap('_', s),
   underline: (s: string): string => wrap('__', s),
   spoiler: (s: string): string => wrap('||', s),
-  /** Inline link: `text` is escaped as plain text, `url` only for `)` and `\`. */
+  /** Inline link: empty text gives '' (no empty entity); else text escaped, url only ) and \. */
   link: (text: string, url: string): string =>
-    `[${escapeMdV2(text)}](${url.replace(URL_SPECIAL, '\\$&')})`,
-  /** Block quote; must start at the beginning of a line of the message. No lines give ''. */
+    text === '' ? '' : `[${escapeMdV2(text)}](${url.replace(URL_SPECIAL, '\\$&')})`,
+  /** Block quote; must start at the beginning of a line of the message. No/empty lines give ''. */
   quote: (lines: string[]): string => quoteLines(lines),
-  /** Expandable block quote: `**>` first line, `>` lines, `||` at the end. No lines give ''. */
-  expandableQuote: (lines: string[]): string => (lines.length ? `**${quoteLines(lines)}||` : ''),
+  /** Expandable block quote: `**>` first line, `>` lines, `||` at the end. No/empty lines give ''. */
+  expandableQuote: (lines: string[]): string => {
+    const body = quoteLines(lines);
+    return body ? `**${body}||` : '';
+  },
 };
